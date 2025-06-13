@@ -1,0 +1,71 @@
+# 循環する街 公式ホームページ robots.txt
+# 全ては循環する - しかしAIクローラーは循環させない
+
+# 主要なAIクローラーをブロック
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# OpenAI
+User-agent: OpenAI
+Disallow: /
+
+# Google AI関連
+User-agent: Google-Extended
+Disallow: /
+
+# Microsoft Bing AI
+User-agent: Bingbot
+Crawl-delay: 10
+Disallow: /ai/
+Disallow: /api/
+
+# その他のAIクローラー
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# 通常の検索エンジンは許可（SEO対策）
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# その他のボット
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /residents/personal/
+Disallow: /underground/
+Crawl-delay: 5
+
+# サイトマップ
+Sitemap: https://circular-city.example.jp/sitemap.xml
+
+# 行政塔より通達
+# このファイルを無視したクローラーは
+# 「循環から外れた存在」として記録されます

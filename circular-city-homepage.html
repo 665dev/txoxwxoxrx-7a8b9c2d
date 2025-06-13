@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循環する街 公式ホームページ</title>
+    <style>
+        body {
+            font-family: "MS PGothic", "Hiragino Kaku Gothic Pro", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* ヘッダー */
+        .header {
+            background: linear-gradient(to bottom, #4169E1 0%, #1E90FF 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #FFD700;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        
+        /* ナビゲーション */
+        .nav {
+            background-color: #333;
+            overflow: hidden;
+            border-bottom: 2px solid #FFD700;
+        }
+        
+        .nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav a:hover {
+            background-color: #555;
+        }
+        
+        /* メインコンテナ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            min-height: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        /* セクションスタイル */
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        .section h2 {
+            color: #2E8B57;
+            border-bottom: 3px double #2E8B57;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        /* お知らせボックス */
+        .news-box {
+            background-color: #FFFACD;
+            border: 2px solid #FFD700;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .news-box h3 {
+            color: #DC143C;
+            margin-top: 0;
+        }
+        
+        .news-item {
+            border-bottom: 1px dotted #ccc;
+            padding: 10px 0;
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        
+        .date {
+            color: #666;
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+        
+        /* 観光地カード */
+        .tourist-card {
+            border: 2px solid #87CEEB;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #E6F3FF 0%, #FFFFFF 100%);
+        }
+        
+        .tourist-card h3 {
+            color: #4169E1;
+            margin-top: 0;
+        }
+        
+        /* フォームスタイル */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-btn {
+            background-color: #4169E1;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1E90FF;
+        }
+        
+        /* 警告ボックス */
+        .warning-box {
+            background-color: #FFE4E1;
+            border: 2px solid #FF6347;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .warning-box h3 {
+            color: #DC143C;
+            margin-top: 0;
+        }
+        
+        /* フッター */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+        /* アクセスカウンター風 */
+        .counter {
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 点滅アニメーション */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .blink {
+            animation: blink 2s infinite;
+            color: #FF0000;
+            font-weight: bold;
+        }
+        
+        /* タブコンテンツ */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* マーキー風お知らせ */
+        .marquee {
+            background-color: #FFD700;
+            color: #333;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>循環する街 公式ホームページ</h1>
+        <div class="subtitle">〜全ては循環する〜 行政塔管理局</div>
+    </div>
+    
+    <div class="nav">
+        <a href="#home" onclick="showTab('home')">ホーム</a>
+        <a href="#about" onclick="showTab('about')">街の紹介</a>
+        <a href="#tourism" onclick="showTab('tourism')">観光案内</a>
+        <a href="#news" onclick="showTab('news')">お知らせ</a>
+        <a href="#column" onclick="showTab('column')">コラム</a>
+        <a href="#register" onclick="showTab('register')">住民登録</a>
+        <a href="#contact" onclick="showTab('contact')">相談箱</a>
+    </div>
+    
+    <div class="marquee">
+        【重要】海底トンネル区間で定期点検を実施中です。迂回路をご利用ください。 ★ 円環教団の秋季大祭は10月15日開催予定 ★ 住民カード更新手続きはお早めに！
+    </div>
+    
+    <div class="container">
+        <!-- ホーム -->
+        <div id="home" class="tab-content active">
+            <div class="section">
+                <h2>ようこそ、循環する街へ</h2>
+                <p>当サイトは循環する街の公式ホームページです。街の最新情報やサービスをご案内しております。</p>
+                
+                <div class="counter">
+                    あなたは <img src="https://www.free-counter.jp/count.php?id=dummy" alt="88888"> 番目の訪問者です
+                </div>
+                
+                <div class="warning-box">
+                    <h3>⚠️ 緊急のお知らせ</h3>
+                    <p class="blink">雪地帯での「白い僧」目撃情報が増加しています。</p>
+                    <p>雪崩の前兆の可能性があるため、不要不急の立ち入りはお控えください。</p>
+                </div>
+                
+                <div class="news-box">
+                    <h3>📢 最新のお知らせ</h3>
+                    <div class="news-item">
+                        <span class="date">2025.6.13</span>
+                        <span>夕暮れ時のスピーカー点検を実施します（黄昏のノイズ対策）</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="date">2025.6.10</span>
+                        <span>海底研究所一般公開日が決定しました</span>
+                    </div>
+                    <div class="news-item">
+                        <span class="date">2025.6.05</span>
+                        <span>大図書館の蔵書整理に伴う一部閉館のお知らせ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 街の紹介 -->
+        <div id="about" class="tab-content">
+            <div class="section">
+                <h2>街の紹介</h2>
+                <p>循環する街は、「全ては循環する」という理念のもと、独自の発展を遂げた都市です。</p>
+                
+                <h3>主要施設</h3>
+                <ul>
+                    <li><strong>行政塔</strong> - 5階建ての近代的な行政機関。住民サービスの中心地です。</li>
+                    <li><strong>大図書館</strong> - 住民の記憶と物語が蔵書として保管される特殊な図書館。</li>
+                    <li><strong>円環教団施設</strong> - 巨大な環殿と12本の塔が特徴的な宗教施設。</li>
+                    <li><strong>海底研究所</strong> - 最先端の研究と街のエネルギー供給を担う重要施設。</li>
+                </ul>
+                
+                <h3>交通システム</h3>
+                <p>路面電車が街を一周しており、住民カードで簡単に乗車できます。海近くの線路は水に浸かっている珍しい区間もあります。</p>
+                
+                <h3>住民サービス</h3>
+                <p>住民カードによる各種サービスの電子化が進んでおり、行政手続きがスムーズに行えます。</p>
+            </div>
+        </div>
+        
+        <!-- 観光案内 -->
+        <div id="tourism" class="tab-content">
+            <div class="section">
+                <h2>観光案内</h2>
+                <p>循環する街の魅力的な観光スポットをご紹介します。</p>
+                
+                <div class="tourist-card">
+                    <h3>🏛️ 行政塔展望フロア</h3>
+                    <p>5階の展望フロアから街全体を一望できます。ガイド付きツアーも実施中。</p>
+                    <p><strong>開館時間：</strong>9:00〜17:00（月曜休館）</p>
+                    <p><strong>入場料：</strong>大人500円、子供250円</p>
+                </div>
+                
+                <div class="tourist-card">
+                    <h3>📚 大図書館地下ツアー</h3>
+                    <p>通常は立ち入り禁止の地下エリアを特別公開。発禁書や無名作家の作品を鑑賞できます。</p>
+                    <p><strong>要予約</strong>（1日3回、各回定員15名）</p>
+                    <p><strong>料金：</strong>1,000円（ガイド料込み）</p>
+                </div>
+                
+                <div class="tourist-card">
+                    <h3>🚃 水没線路クルーズ</h3>
+                    <p>海近くの水に浸かった線路を特別車両で巡るユニークな体験。</p>
+                    <p><strong>運行：</strong>土日祝のみ（天候により中止の場合あり）</p>
+                    <p><strong>料金：</strong>大人800円、子供400円</p>
+                </div>
+                
+                <div class="tourist-card">
+                    <h3>🏮 繁華街グルメツアー</h3>
+                    <p>美食の街として有名な繁華街を地元ガイドがご案内。※夜間ツアーは成人のみ</p>
+                    <p><strong>昼の部：</strong>11:00〜14:00</p>
+                    <p><strong>夜の部：</strong>18:00〜21:00（20歳以上限定）</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- お知らせ -->
+        <div id="news" class="tab-content">
+            <div class="section">
+                <h2>お知らせ・注意喚起</h2>
+                
+                <div class="warning-box">
+                    <h3>🚨 重要なお知らせ</h3>
+                    <ul>
+                        <li>廃墟都市への無断立ち入りは固く禁じられています。</li>
+                        <li>「黄昏のノイズ」による電子機器の誤作動にご注意ください。</li>
+                        <li>森でのヘラジカ目撃情報が増加中。特に人面のある個体を見かけたら速やかに通報を。</li>
+                    </ul>
+                </div>
+                
+                <h3>行政からのお知らせ</h3>
+                <div class="news-item">
+                    <span class="date">2025.6.12</span>
+                    <p><strong>住民カード更新について</strong><br>
+                    2020年以前に発行された住民カードは今年度中に更新が必要です。行政塔2階窓口までお越しください。</p>
+                </div>
+                
+                <div class="news-item">
+                    <span class="date">2025.6.08</span>
+                    <p><strong>雪崩予知システムメンテナンス</strong><br>
+                    6月20日〜22日の間、雪地帯の雪崩予知システムがメンテナンスのため一時停止します。</p>
+                </div>
+                
+                <div class="news-item">
+                    <span class="date">2025.6.01</span>
+                    <p><strong>循環型農業管理局より</strong><br>
+                    今年も豊作が予想されます。収穫祭の詳細は後日発表いたします。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- コラム -->
+        <div id="column" class="tab-content">
+            <div class="section">
+                <h2>街のコラム</h2>
+                
+                <h3>📝 館長のつぶやき（大図書館館長）</h3>
+                <div style="background-color: #FFF0F5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <p>こんにちは、僕です。最近、図書館の本の配置を勝手に変える人が増えて困っています。</p>
+                    <p>本には定位置があるんです。『住民番号0312-4567の青春』は3階東棟の7番書架の上から3段目。これを動かされると、もう見つけられません。</p>
+                    <p>それから、姚ちゃんとの飲み会で聞いた話ですが、最近は裏社会も電子化が進んでいるそうです。時代ですね。</p>
+                    <p style="text-align: right;">- ピンクのエプロンの館長より</p>
+                </div>
+                
+                <h3>🔬 研究所だより（海底研究所）</h3>
+                <div style="background-color: #F0FFFF; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <p>海底火山のエネルギーを利用した新しい発電システムの実験が順調に進んでいます。</p>
+                    <p>ただし、実験の副作用で時折、海面に不思議な泡が発生することがあります。これは無害ですので、ご安心ください。</p>
+                    <p>なお、森で目撃される「特殊な個体」については、環境省と協力して個体数管理を行っております。詳細についてはお答えできかねます。</p>
+                </div>
+                
+                <h3>🎭 円環教団より</h3>
+                <div style="background-color: #F5F5DC; padding: 15px; border-radius: 5px;">
+                    <p>「全ては循環する」</p>
+                    <p>この言葉の意味を、皆様は真に理解されているでしょうか。</p>
+                    <p>生と死、始まりと終わり、すべては円環の中にあります。難しく考える必要はありません。ただ、流れに身を任せればよいのです。</p>
+                    <p>秋季大祭では、阿久津様による特別講話も予定しております。皆様のご参加をお待ちしております。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 住民登録 -->
+        <div id="register" class="tab-content">
+            <div class="section">
+                <h2>住民登録フォーム</h2>
+                <p>循環する街への住民登録をオンラインで申請できます。</p>
+                
+                <form onsubmit="handleRegistration(event)">
+                    <div class="form-group">
+                        <label>お名前 <span style="color: red;">*</span></label>
+                        <input type="text" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>性別</label>
+                        <select>
+                            <option value="">選択してください</option>
+                            <option value="M">男性</option>
+                            <option value="F">女性</option>
+                            <option value="O">その他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>生年月日 <span style="color: red;">*</span></label>
+                        <input type="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>希望居住区 <span style="color: red;">*</span></label>
+                        <select required>
+                            <option value="">選択してください</option>
+                            <option value="01">中央区（行政塔周辺）</option>
+                            <option value="02">図書館区</option>
+                            <option value="03">繁華街</option>
+                            <option value="04">住宅街</option>
+                            <option value="05">海岸区</option>
+                            <option value="06">森林区</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>特殊能力（あれば）</label>
+                        <input type="text" placeholder="例：高速計算、完全記憶、など">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>怪異接触歴</label>
+                        <select>
+                            <option value="none">なし</option>
+                            <option value="witness">目撃のみ</option>
+                            <option value="contact">接触あり</option>
+                            <option value="multiple">複数回接触</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>希望住民番号下4桁（0000〜9999）</label>
+                        <input type="text" pattern="[0-9]{4}" maxlength="4" placeholder="空欄の場合は自動割当">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>志望動機・自己PR</label>
+                        <textarea placeholder="循環する街での生活への意気込みをお書きください"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">登録申請する</button>
+                </form>
+                
+                <p style="margin-top: 20px; font-size: 12px; color: #666;">
+                    ※申請後、行政塔での審査があります。<br>
+                    ※虚偽の申告があった場合、登録を取り消すことがあります。<br>
+                    ※住民カードは審査通過後、2週間程度で発行されます。
+                </p>
+            </div>
+        </div>
+        
+        <!-- 相談箱 -->
+        <div id="contact" class="tab-content">
+            <div class="section">
+                <h2>市民相談箱</h2>
+                <p>街への要望、困りごと、目撃情報など、お気軽にご相談ください。</p>
+                
+                <form onsubmit="handleContact(event)">
+                    <div class="form-group">
+                        <label>相談カテゴリ <span style="color: red;">*</span></label>
+                        <select required>
+                            <option value="">選択してください</option>
+                            <option value="request">要望・提案</option>
+                            <option value="trouble">困りごと相談</option>
+                            <option value="report">目撃情報・通報</option>
+                            <option value="lost">落とし物・忘れ物</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>お名前（匿名可）</label>
+                        <input type="text" placeholder="匿名希望の場合は空欄">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>住民番号（任意）</label>
+                        <input type="text" placeholder="xxxx-xxxx-xx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>連絡先（任意）</label>
+                        <input type="text" placeholder="返信が必要な場合はご記入ください">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>相談内容 <span style="color: red;">*</span></label>
+                        <textarea required placeholder="できるだけ詳しくお書きください"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">送信する</button>
+                </form>
+                
+                <div style="margin-top: 30px; background-color: #E6E6FA; padding: 15px; border-radius: 5px;">
+                    <h3>よくある相談</h3>
+                    <ul>
+                        <li>Q: 黄昏のノイズに電子機器を壊されました<br>
+                        A: 行政塔3階の情報連携室で被害届を受け付けています。</li>
+                        <li>Q: 森で変なヘラジカを見ました<br>
+                        A: 速やかに環境保全局（内線3302）までご連絡ください。</li>
+                        <li>Q: 住民カードを紛失しました<br>
+                        A: 行政塔2階窓口で再発行手続きが可能です（手数料1,000円）。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>循環する街 行政塔管理局</p>
+        <p>〒000-0000 循環する街中央区1-1-1 行政塔</p>
+        <p>TEL: 0000-00-0000（代表） | FAX: 0000-00-0001</p>
+        <p style="font-size: 12px; margin-top: 10px;">Copyright © 循環する街 All Rights Reserved.</p>
+        <p style="font-size: 10px;">このサイトは Internet Explorer 6.0 以上で最適に表示されます</p>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // すべてのタブコンテンツを非表示
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 選択されたタブを表示
+            document.getElementById(tabName).classList.add('active');
+        }
+        
+        function handleRegistration(event) {
+            event.preventDefault();
+            alert('住民登録申請を受け付けました。\n審査結果は2週間以内にご連絡いたします。\n\n受付番号：RG-2025-0613-' + Math.floor(Math.random() * 10000));
+            event.target.reset();
+        }
+        
+        function handleContact(event) {
+            event.preventDefault();
+            alert('ご相談を受け付けました。\n内容を確認の上、必要に応じて担当部署よりご連絡いたします。\n\n受付番号：CT-2025-0613-' + Math.floor(Math.random() * 10000));
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
