@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="googlebot" content="noindex, nofollow">
+    <title>循環する街 - 認証</title>
+    <style>
+        body {
+            font-family: "MS PGothic", sans-serif;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .auth-container {
+            background-color: #444;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .auth-container h1 {
+            color: #4169E1;
+            margin-bottom: 20px;
+        }
+        .auth-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #666;
+            border-radius: 5px;
+            margin: 10px;
+            width: 200px;
+        }
+        .auth-container button {
+            padding: 10px 30px;
+            font-size: 16px;
+            background-color: #4169E1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .auth-container button:hover {
+            background-color: #1E90FF;
+        }
+        .error {
+            color: #FF6347;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>循環する街</h1>
+        <p>住民番号を入力してください</p>
+        <input type="password" id="password" placeholder="住民番号" onkeypress="checkEnter(event)">
+        <br>
+        <button onclick="authenticate()">入場</button>
+        <p class="error" id="error">住民番号が正しくありません</p>
+    </div>
+
+    <script>
+        // 簡易的なパスワード保護
+        // 実際の住民番号っぽい複数のパスワードを設定
+        const validPasswords = [
+            '0312-4567-01',  // 中央区
+            '0519-2023-00',  // 森林区
+            'visitor2025',   // 訪問者用
+            'junkan'         // 簡易パスワード
+        ];
+
+        function authenticate() {
+            const password = document.getElementById('password').value;
+            
+            if (validPasswords.includes(password)) {
+                // 認証成功 - メインページを表示
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('residentNumber', password);
+                window.location.href = 'main.html'; // メインページへリダイレクト
+            } else {
+                // 認証失敗
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('password').value = '';
+                
+                // 3秒後にエラーメッセージを隠す
+                setTimeout(() => {
+                    document.getElementById('error').style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                authenticate();
+            }
+        }
+
+        // ページ読み込み時にフォーカス
+        window.onload = function() {
+            document.getElementById('password').focus();
+        };
+    </script>
+</body>
+</html>
