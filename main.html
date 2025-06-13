@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="循環する街 - 参加型創作企画の公式ホームページ（フィクション）">
-    <meta property="og:title" content="循環する街 公式ホームページ">
-    <meta property="og:description" content="全ては循環する - 創作企画のウェブサイト">
-    <meta property="og:type" content="website">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
     <title>循環する街 公式ホームページ</title>
+    <script>
+        // 認証チェック
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'index.html';
+        }
+    </script>
     <style>
         body {
             font-family: "MS PGothic", "Hiragino Kaku Gothic Pro", sans-serif;
